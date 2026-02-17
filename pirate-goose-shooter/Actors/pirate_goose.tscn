@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://c00y8o6gpja72"]
+
+[ext_resource type="Script" uid="uid://cqb4pon62tle8" path="res://Actors/pirate_goose.gd" id="1_d8h4r"]
+[ext_resource type="Texture2D" uid="uid://dte37suqiv84f" path="res://Sprites/goose.png" id="2_ybs5l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ybs5l"]
+size = Vector2(42, 44)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ybs5l"]
+radius = 20.024984
+
+[node name="PirateGoose" type="CharacterBody2D" unique_id=1768410215]
+collision_mask = 4
+script = ExtResource("1_d8h4r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=789479336]
+texture = ExtResource("2_ybs5l")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1436806229]
+shape = SubResource("RectangleShape2D_ybs5l")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1429986562]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=540177248]
+shape = SubResource("CircleShape2D_ybs5l")
+
+[node name="DashResetTimer" type="Timer" parent="." unique_id=1032148630]
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="." unique_id=1363934096]
+wait_time = 0.2
+one_shot = true
+
+[node name="InvinicibleTimer" type="Timer" parent="." unique_id=90024061]
+wait_time = 1.2
+one_shot = true
+
+[node name="ReloadTimer" type="Timer" parent="." unique_id=474161942]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="DashResetTimer" to="." method="_on_dash_reset_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="InvinicibleTimer" to="." method="_on_invinicible_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
