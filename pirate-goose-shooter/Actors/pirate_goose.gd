@@ -1,6 +1,7 @@
 extends CharacterBody2D
 @export var speed = 100
 @export var max_health = 10
+@export var max_ammo = 6
 @onready var projectile = load("res://Actors/player_bullet.tscn")
 @onready var level = get_tree().get_root()
 var health = max_health
@@ -11,7 +12,7 @@ var projectile_reloaded = true
 var dashing = false
 var dash_reset = true
 var invincible_frames = false
-
+var ammo_rn = max_ammo
 
 
 func _physics_process(_delta: float) -> void:
@@ -88,7 +89,7 @@ func _physics_process(_delta: float) -> void:
 	#Sets a global variable that allows all scripts to know where the player is
 	Global.player_position = global_position
 	
-	if Input.is_action_just_pressed("Shoot") and projectile_reloaded:
+	if Input.is_action_just_pressed("Shoot") and projectile_reloaded and ammo_rn > 0:
 		var instance = projectile.instantiate()
 		instance.dir = get_angle_to(get_global_mouse_position())
 		instance.spawnPos = global_position
@@ -96,8 +97,17 @@ func _physics_process(_delta: float) -> void:
 		level.add_child.call_deferred(instance)
 		projectile_reloaded = false
 		$ReloadTimer.start()
+		ammo_rn -= 1
+		if ammo_rn <= 0:
+			ammo_rn = 0
+			$RefillTimer.start()
+
+	# refills ammo w timer when u run out
+func _on_refill_timer_timeout() -> void:
+	projectile_reloaded = true
+	ammo_rn = max_ammo
 	
-	
+
 	#Taking Damage
 func take_damage():
 	health -= 1
@@ -126,9 +136,6 @@ func _on_dash_reset_timer_timeout() -> void:
 func _on_invinicible_timer_timeout() -> void:
 	invincible_frames = false
 	Global.player_invincible = false
-
-
-
 
 
 func _on_reload_timer_timeout() -> void:
