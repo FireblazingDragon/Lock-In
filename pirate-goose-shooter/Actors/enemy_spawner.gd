@@ -2,6 +2,7 @@ extends Node2D
 @export var enemy : PackedScene
 
 
+	#Creates an enemy continuously with a certain time delay based on the timer node
 func _on_spawn_timer_timeout() -> void:
 	var spawned_enemy = enemy.instantiate()
 	spawned_enemy.global_position = global_position
