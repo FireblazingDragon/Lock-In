@@ -178,7 +178,12 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
+[node name="RefillTimer" type="Timer" parent="." unique_id=1556924627]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="timeout" from="DashResetTimer" to="." method="_on_dash_reset_timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="InvinicibleTimer" to="." method="_on_invinicible_timer_timeout"]
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="RefillTimer" to="." method="_on_refill_timer_timeout"]
