@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dte37suqiv84f"
-path="res://.godot/imported/goose.png-815f098fd04d67490aad96c528474e83.ctex"
+uid="uid://ckefbqfpwmlfk"
+path="res://.godot/imported/egg.png-d82a9dfafaf1b4885d182052d47e7b38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/goose.png"
-dest_files=["res://.godot/imported/goose.png-815f098fd04d67490aad96c528474e83.ctex"]
+source_file="res://Sprites/egg.png"
+dest_files=["res://.godot/imported/egg.png-d82a9dfafaf1b4885d182052d47e7b38.ctex"]
 
 [params]
 
@@ -31,7 +31,7 @@ process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2
 process/channel_remap/alpha=3
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false

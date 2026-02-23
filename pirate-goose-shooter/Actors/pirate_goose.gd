@@ -6,6 +6,7 @@ extends CharacterBody2D
 var health = max_health
 var vertical_direction = 0
 var horizontal_direction = 0
+var last_horz_dir = 0
 var projectile_reloaded = true
 var dashing = false
 var dash_reset = true
@@ -19,12 +20,22 @@ func _physics_process(_delta: float) -> void:
 	if dashing == false:
 		if Input.is_action_just_pressed("Up"):
 			vertical_direction = -1
+			if velocity.y > 0:
+				velocity.y = 0
 		elif Input.is_action_just_pressed("Right"):
 			horizontal_direction = 1
+			last_horz_dir = 1
+			if velocity.x > 0:
+				velocity.x = 0
 		elif Input.is_action_just_pressed("Down"):
 			vertical_direction = 1
+			if velocity.y < 0:
+				velocity.y = 0
 		elif Input.is_action_just_pressed("Left"):
 			horizontal_direction = -1
+			last_horz_dir = -1
+			if velocity.x < 0:
+				velocity.x = 0
 		
 		if not Input.is_action_pressed("Up") and vertical_direction == -1:
 			vertical_direction = 0
@@ -47,8 +58,8 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Dash") and dash_reset == true:
 		dashing = true
 		dash_reset = false
-		$Sprite2D.scale.x = move_toward(1.0, 1.3, 8)
-		$Sprite2D.scale.y = move_toward(1.0, 0.8, 8)
+		$AnimatedSprite2D.scale.x = move_toward(1.0, 1.3, 8)
+		$AnimatedSprite2D.scale.y = move_toward(1.0, 0.8, 8)
 		$DashResetTimer.start()
 		$DashTimer.start()
 	
@@ -64,6 +75,15 @@ func _physics_process(_delta: float) -> void:
 			velocity.x = move_toward(velocity.x, overall_direction.x * speed, 20)
 			velocity.y = move_toward(velocity.y, overall_direction.y * speed, 20)
 	
+	if velocity.x > 5:
+		$AnimatedSprite2D.play("MoveRight")
+	elif velocity.x < -5:
+		$AnimatedSprite2D.play("MoveLeft")
+	elif last_horz_dir == 1:
+		$AnimatedSprite2D.play("IdleRight")
+	elif last_horz_dir == -1:
+		$AnimatedSprite2D.play("IdleLeft")
+		
 	
 	#Sets a global variable that allows all scripts to know where the player is
 	Global.player_position = global_position
@@ -88,15 +108,15 @@ func take_damage():
 	
 func sprite_flash():
 	var tween: Tween = create_tween()
-	tween.tween_property($Sprite2D, "modulate:v", 1, 0.25).from(15)
+	tween.tween_property($AnimatedSprite2D, "modulate:v", 1, 0.25).from(15)
 
 
 func _on_dash_timer_timeout() -> void:
 	dashing = false
 	if invincible_frames == false:
 		Global.player_invincible = false
-	$Sprite2D.scale.x = move_toward($Sprite2D.scale.x, 1.0, 10)
-	$Sprite2D.scale.y = move_toward($Sprite2D.scale.y, 1.0, 10)
+	$AnimatedSprite2D.scale.x = move_toward($AnimatedSprite2D.scale.x, 1.0, 10)
+	$AnimatedSprite2D.scale.y = move_toward($AnimatedSprite2D.scale.y, 1.0, 10)
 	
 
 func _on_dash_reset_timer_timeout() -> void:

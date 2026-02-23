@@ -2,11 +2,85 @@
 
 [ext_resource type="PackedScene" uid="uid://c00y8o6gpja72" path="res://Actors/pirate_goose.tscn" id="1_u52ul"]
 [ext_resource type="PackedScene" uid="uid://j83kpaqkiskp" path="res://Actors/duck_enemy.tscn" id="2_vonw3"]
+[ext_resource type="PackedScene" uid="uid://ci6vaa6aqkepg" path="res://Actors/enemy_spawner.tscn" id="3_oi3di"]
+[ext_resource type="PackedScene" uid="uid://bemjap1qns6yw" path="res://Actors/heart.tscn" id="4_0b4ue"]
 
 [node name="Level" type="Node2D" unique_id=656895149]
 
 [node name="PirateGoose" parent="." unique_id=1768410215 instance=ExtResource("1_u52ul")]
 position = Vector2(948, 574)
 
+[node name="Camera2D" type="Camera2D" parent="PirateGoose" unique_id=1530083683]
+
 [node name="DuckEnemy" parent="." unique_id=1830774375 instance=ExtResource("2_vonw3")]
-position = Vector2(94, 50)
+position = Vector2(167, -5)
+
+[node name="EnemySpawner" parent="." unique_id=564283183 instance=ExtResource("3_oi3di")]
+position = Vector2(934, -109)
+enemy = ExtResource("2_vonw3")
+
+[node name="EnemySpawner2" parent="." unique_id=21613634 instance=ExtResource("3_oi3di")]
+position = Vector2(944, 1120)
+enemy = ExtResource("2_vonw3")
+
+[node name="EnemySpawner3" parent="." unique_id=1958947282 instance=ExtResource("3_oi3di")]
+position = Vector2(-112, 529)
+enemy = ExtResource("2_vonw3")
+
+[node name="EnemySpawner4" parent="." unique_id=1040947997 instance=ExtResource("3_oi3di")]
+position = Vector2(1942, 602)
+enemy = ExtResource("2_vonw3")
+
+[node name="EnemySpawner5" parent="." unique_id=313349057 instance=ExtResource("3_oi3di")]
+position = Vector2(1932, 1134)
+enemy = ExtResource("2_vonw3")
+
+[node name="EnemySpawner6" parent="." unique_id=1658351250 instance=ExtResource("3_oi3di")]
+position = Vector2(-84, 1078)
+enemy = ExtResource("2_vonw3")
+
+[node name="EnemySpawner7" parent="." unique_id=2045172932 instance=ExtResource("3_oi3di")]
+position = Vector2(-81, -82)
+enemy = ExtResource("2_vonw3")
+
+[node name="EnemySpawner8" parent="." unique_id=488722814 instance=ExtResource("3_oi3di")]
+position = Vector2(1935, -113)
+enemy = ExtResource("2_vonw3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1784463563]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=2143745183]
+offset_left = 137.0
+offset_top = 161.0
+offset_right = 953.0
+offset_bottom = 201.0
+
+[node name="heart1" type="TextureRect" parent="CanvasLayer/HBoxContainer" unique_id=1091615831]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+
+[node name="Heart" parent="CanvasLayer/HBoxContainer/heart1" unique_id=1643396572 instance=ExtResource("4_0b4ue")]
+
+[node name="heart2" type="TextureRect" parent="CanvasLayer/HBoxContainer" unique_id=525261333]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+
+[node name="Heart" parent="CanvasLayer/HBoxContainer/heart2" unique_id=76548552 instance=ExtResource("4_0b4ue")]
+
+[node name="heart3" type="TextureRect" parent="CanvasLayer/HBoxContainer" unique_id=1892714248]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+
+[node name="Heart" parent="CanvasLayer/HBoxContainer/heart3" unique_id=1067707072 instance=ExtResource("4_0b4ue")]
+
+[node name="heart4" type="TextureRect" parent="CanvasLayer/HBoxContainer" unique_id=1095782936]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+
+[node name="Heart" parent="CanvasLayer/HBoxContainer/heart4" unique_id=961176444 instance=ExtResource("4_0b4ue")]
+
+[node name="heart5" type="TextureRect" parent="CanvasLayer/HBoxContainer" unique_id=310829605]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+
+[node name="Heart" parent="CanvasLayer/HBoxContainer/heart5" unique_id=543307199 instance=ExtResource("4_0b4ue")]
