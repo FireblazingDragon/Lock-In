@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Pirate Goose Shooter"
-run/main_scene="uid://djjmebrbksrlr"
+run/main_scene="uid://dnq2dg5jql6rm"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
