@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://j83kpaqkiskp"]
+
+[ext_resource type="Script" uid="uid://v2t3qgx1ffal" path="res://Actors/DucksAndGooses/duck_enemy.gd" id="1_i5ckx"]
+[ext_resource type="Texture2D" uid="uid://da5vbtk053wyg" path="res://Sprites/baseDuck.png" id="2_i5ckx"]
+[ext_resource type="PackedScene" uid="uid://qiciglpploy7" path="res://Actors/general_health_bar.tscn" id="3_k5s2c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5ckx"]
+atlas = ExtResource("2_i5ckx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tml3"]
+atlas = ExtResource("2_i5ckx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ej6a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5ckx")
+}],
+"loop": true,
+"name": &"MoveLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tml3")
+}],
+"loop": true,
+"name": &"MoveRight",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7sjue"]
+size = Vector2(49, 44)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i5ckx"]
+radius = 527.8371
+
+[node name="DuckEnemy" type="CharacterBody2D" unique_id=1830774375 groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_i5ckx")
+health = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1051452083]
+sprite_frames = SubResource("SpriteFrames_0ej6a")
+animation = &"MoveRight"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=100071842]
+position = Vector2(2.5, 5)
+shape = SubResource("RectangleShape2D_7sjue")
+
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=424727530]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=575472245]
+shape = SubResource("CircleShape2D_i5ckx")
+
+[node name="Timer" type="Timer" parent="." unique_id=1725000941]
+one_shot = true
+
+[node name="GeneralHealthBar" parent="." unique_id=611002063 node_paths=PackedStringArray("the_guy_with_this_health_bar") instance=ExtResource("3_k5s2c")]
+offset_left = -64.0
+offset_top = -56.0
+offset_right = 64.0
+offset_bottom = -29.0
+the_guy_with_this_health_bar = NodePath("..")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
